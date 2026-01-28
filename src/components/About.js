@@ -1,17 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FaGithub, FaLinkedin, FaEnvelope, FaPython, FaJs, FaJava, FaAws 
-} from 'react-icons/fa';
 import './About.css';
 
 const About = () => {
-  const techSkills = [
-    { icon: <FaPython />, label: "Python" },
-    { icon: <FaJava />, label: "Java" },
-    { icon: <FaJs />, label: "JavaScript" },
-    { icon: <FaAws />, label: "AWS" },
-  ];
 
   return (
     <section id="about" className="about">
