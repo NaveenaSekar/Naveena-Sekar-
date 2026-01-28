@@ -1,0 +1,16 @@
+.footer {
+  background: #000000;
+  color: #ffffff;
+  padding: 15px 0;
+}
+
+.footer-simple {
+  text-align: center;
+}
+
+.footer-simple p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #000000;
+  font-weight: bold;
+}

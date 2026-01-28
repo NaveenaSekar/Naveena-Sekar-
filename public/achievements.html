@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Achievements - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ffd700, #ff6b6b, #ffd700);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item.left {
+            justify-content: flex-end;
+            padding-right: calc(50% + 40px);
+        }
+
+        .timeline-item.right {
+            justify-content: flex-start;
+            padding-left: calc(50% + 40px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-dot:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .timeline-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e2e8f0;
+            max-width: 400px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .timeline-item.left .timeline-content::before {
+            right: -12px;
+        }
+
+        .timeline-item.right .timeline-content::before {
+            left: -12px;
+        }
+
+        .achievement-date {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-category {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .achievement-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Summary Section */
+        .achievements-summary {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .summary-content {
+            background: linear-gradient(135deg, #000000 0%, #1e293b 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .summary-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .summary-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .achievement-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item {
+                justify-content: flex-start !important;
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .timeline-content {
+                max-width: 100%;
+            }
+
+            .timeline-content::before {
+                left: -12px !important;
+                right: auto !important;
+            }
+
+            .achievement-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .summary-content {
+                padding: 2rem;
+            }
+
+            .summary-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .summary-content {
+                padding: 1.5rem;
+            }
+
+            .summary-icon {
+                font-size: 3rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <a href="index.html#certifications" class="back-btn" style="position: absolute; left: 20px; top: 20px;">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <h1>My Achievements Timeline</h1>
+            <p>A journey of excellence and continuous growth</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-dot" style="background-color: #ffd700;">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="timeline-content">
+                    <img src="Aca.jpg" alt="Academic Excellence" class="achievement-image">
+                    <div class="achievement-date">2024</div>
+                    <h3>Academic Excellence</h3>
+                    <p>Honored with the Academic Excellence Award 2023-2024 (Department of Information Technology), by Kongu Vellalar Institute of Technology Trust, Kongu Engineering College.</p>
+                    <span class="achievement-category" style="background-color: #ffd700;">Academic Excellence</span>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-dot" style="background-color: #ff6b6b;">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="timeline-content">
+                    <img src="Logo.png" alt="Logo Designing Winner" class="achievement-image">
+                    <div class="achievement-date">2025</div>
+                    <h3>Logo Designing Winner</h3>
+                    <p>Won first prize in the recent logo designing competition organized by Women Development Cell, KEC.</p>
+                    <span class="achievement-category" style="background-color: #ff6b6b;">Design</span>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-dot" style="background-color: #cd7f32;">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="timeline-content">
+                    <img src="Hacks.jpg" alt="Hackathon Runner" class="achievement-image">
+                    <div class="achievement-date">2025</div>
+                    <h3>Hackathon Runner</h3>
+                    <p>Secured 2nd place in 30 hours of innovation, software edition organized by the KEC Institution Innovation Council and KEC Coding Forum at Kongu Engineering College.</p>
+                    <span class="achievement-category" style="background-color: #cd7f32;">Hackathon</span>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-dot" style="background-color: #9333ea;">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="timeline-content">
+                    <img src="Code.jpg" alt="CodeZone Winner" class="achievement-image">
+                    <div class="achievement-date">2025</div>
+                    <h3>CodeZone Winner</h3>
+                    <p>Won first prize in Coding Competition during SAKHI-2K25, an Intra-College Technical Symposium organized by the IEEE Women in Engineering, KEC.</p>
+                    <span class="achievement-category" style="background-color: #9333ea;">Programming</span>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-dot" style="background-color: #c0c0c0;">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="timeline-content">
+                    <img src="we.jpg" alt="Hackathon Winner" class="achievement-image">
+                    <div class="achievement-date">2025</div>
+                    <h3>Hackathon Winner</h3>
+                    <p>Secured 1st place in HACKATHON organized by the Tamil Mandram of KEC - 8 hours of innovation and software edition in Tamil.</p>
+                    <span class="achievement-category" style="background-color: #c0c0c0;">Hackathon</span>
+                </div>
+            </div>
+        </div>
+
+            </div>
+</body>
+</html>
