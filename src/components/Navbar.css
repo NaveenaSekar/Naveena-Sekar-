@@ -166,5 +166,65 @@
   
   .nav-container {
     justify-content: space-between;
+    padding: 0 1rem;
+  }
+  
+  .navbar {
+    width: 95%;
+    top: 15px;
+  }
+  
+  .navbar.scrolled {
+    top: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    width: 98%;
+    top: 10px;
+    border-radius: 25px;
+  }
+  
+  .navbar.scrolled {
+    top: 5px;
+  }
+  
+  .nav-container {
+    padding: 0 0.75rem;
+    height: 50px;
+  }
+  
+  .nav-toggle {
+    font-size: 1.2rem;
+  }
+  
+  .mobile-menu {
+    margin-top: 5px;
+    padding: 0.75rem;
+  }
+  
+  .mobile-link,
+  .mobile-button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .navbar {
+    width: 100%;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    top: 0;
+  }
+  
+  .navbar.scrolled {
+    top: 0;
+  }
+  
+  .nav-container {
+    padding: 0 1rem;
   }
 }

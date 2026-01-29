@@ -239,31 +239,116 @@
 
 @media (max-width: 480px) {
   .skills {
-    padding: 60px 0;
+    padding: 40px 1rem;
+    margin: 10px;
+    border-radius: 12px;
+    border-width: 2px;
   }
 
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .section-header p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .service-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
+    border-radius: 12px;
+    border-width: 2px;
   }
 
   .service-icon {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   .service-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
   }
 
   .service-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .carousel-nav-btn {
+    width: 35px;
+    height: 35px;
     font-size: 0.9rem;
+  }
+
+  .carousel-pagination {
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .pagination-dot.active {
+    width: 30px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .skills {
+    padding: 30px 0.75rem;
+    margin: 5px;
+    border-radius: 8px;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.85rem;
+  }
+
+  .service-card {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card p {
+    font-size: 0.8rem;
+  }
+
+  .carousel-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .carousel-pagination {
+    margin-top: 1rem;
+    gap: 0.4rem;
+  }
+
+  .pagination-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .pagination-dot.active {
+    width: 25px;
+    height: 8px;
   }
 }
 
@@ -421,12 +506,121 @@
     gap: 1.2rem;
   }
 
+  .database-skills-bar {
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+
+  .devtools-skills-bar {
+    left: 1.5rem;
+    width: 70px;
+    padding: 1.2rem 0.8rem;
+    gap: 1.2rem;
+  }
+
+  .deployment-skills-bar {
+    right: 1.5rem;
+    width: 70px;
+    padding: 1.2rem 0.8rem;
+    gap: 1.2rem;
+  }
+
   .skill-icon-wrapper {
     font-size: 2rem;
   }
 
   .skills-bar-icons {
     gap: 1.2rem;
+  }
+
+  .skills-bar-close {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .frontend-skills-bar,
+  .devtools-skills-bar,
+  .deployment-skills-bar {
+    width: 60px;
+    padding: 1rem 0.6rem;
+    gap: 1rem;
+  }
+
+  .database-skills-bar {
+    padding: 1rem 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .frontend-skills-bar {
+    left: 1rem;
+  }
+
+  .devtools-skills-bar {
+    left: 1rem;
+  }
+
+  .deployment-skills-bar {
+    right: 1rem;
+  }
+
+  .skill-icon-wrapper {
+    font-size: 1.8rem;
+  }
+
+  .skills-bar-icons {
+    gap: 1rem;
+  }
+
+  .skills-bar-close {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    top: -8px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 320px) {
+  .frontend-skills-bar,
+  .devtools-skills-bar,
+  .deployment-skills-bar {
+    width: 50px;
+    padding: 0.8rem 0.4rem;
+    gap: 0.8rem;
+  }
+
+  .database-skills-bar {
+    padding: 0.8rem 0.6rem;
+    gap: 0.6rem;
+  }
+
+  .frontend-skills-bar {
+    left: 0.5rem;
+  }
+
+  .devtools-skills-bar {
+    left: 0.5rem;
+  }
+
+  .deployment-skills-bar {
+    right: 0.5rem;
+  }
+
+  .skill-icon-wrapper {
+    font-size: 1.5rem;
+  }
+
+  .skills-bar-icons {
+    gap: 0.8rem;
+  }
+
+  .skills-bar-close {
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
   }
 }
 

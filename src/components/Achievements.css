@@ -248,35 +248,102 @@
   .achievements-page {
     margin: 10px;
     max-width: none;
-    padding: 30px 0;
+    padding: 30px 1rem;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
   }
 
   .page-header h1 {
     font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .page-header p {
+    font-size: 1rem;
+  }
+
+  .back-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-container {
+    padding: 1rem 0;
   }
 
   .timeline-line {
     left: 20px;
+    width: 3px;
   }
 
   .timeline-item {
     justify-content: flex-start !important;
     padding-left: 60px !important;
     padding-right: 0 !important;
+    margin-bottom: 2rem;
   }
 
   .timeline-dot {
     left: 20px;
-    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
   }
 
   .timeline-content {
-    max-width: 100%;
+    max-width: calc(100% - 20px);
+    padding: 1.5rem;
+    border-radius: 15px;
   }
 
   .timeline-content::before {
-    left: -12px !important;
+    left: -10px !important;
     right: auto !important;
+    width: 15px;
+    height: 15px;
+  }
+
+  .achievement-date {
+    font-size: 0.8rem;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .achievement-category {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .achievements-summary {
+    margin-top: 2rem;
+  }
+
+  .summary-content {
+    padding: 2rem;
+    border-radius: 15px;
+  }
+
+  .summary-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .achievement-stats {
@@ -284,37 +351,207 @@
     gap: 1.5rem;
   }
 
-  .summary-content {
-    padding: 2rem;
+  .stat-number {
+    font-size: 2.2rem;
   }
 
-  .summary-content h2 {
-    font-size: 2rem;
+  .stat-label {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
+  .achievements-page {
+    margin: 5px;
+    padding: 20px 0.75rem;
+    border-radius: 8px;
+  }
+
   .page-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .back-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-container {
+    padding: 0.5rem 0;
+  }
+
+  .timeline-line {
+    left: 15px;
+    width: 2px;
+  }
+
+  .timeline-item {
+    padding-left: 45px !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-dot {
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 
   .timeline-content {
-    padding: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .timeline-content::before {
+    left: -8px !important;
+    width: 12px;
+    height: 12px;
+  }
+
+  .achievement-date {
+    font-size: 0.75rem;
   }
 
   .timeline-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .achievement-category {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .achievements-summary {
+    margin-top: 1.5rem;
   }
 
   .summary-content {
     padding: 1.5rem;
+    border-radius: 10px;
   }
 
   .summary-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .summary-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .achievement-stats {
+    gap: 1rem;
   }
 
   .stat-number {
+    font-size: 1.8rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .achievements-page {
+    margin: 2px;
+    padding: 15px 0.5rem;
+    border-radius: 6px;
+  }
+
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .page-header p {
+    font-size: 0.85rem;
+  }
+
+  .back-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .timeline-line {
+    left: 12px;
+  }
+
+  .timeline-item {
+    padding-left: 35px !important;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-dot {
+    left: 12px;
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .timeline-content::before {
+    left: -6px !important;
+    width: 10px;
+    height: 10px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.8rem;
+  }
+
+  .achievement-category {
+    font-size: 0.6rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .summary-content {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .summary-icon {
     font-size: 2rem;
+  }
+
+  .summary-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .summary-content p {
+    font-size: 0.85rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
   }
 }

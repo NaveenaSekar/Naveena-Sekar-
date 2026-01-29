@@ -467,24 +467,185 @@
 
 @media (max-width: 480px) {
   .projects {
+    margin: 10px;
+    padding: 30px 1rem;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+
+  .projects-grid {
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    border-radius: 12px;
+  }
+
+  .project-header {
+    padding: 1.2rem;
+  }
+
+  .project-content {
+    padding: 1.2rem;
+  }
+
+  .project-image {
+    height: 150px;
+  }
+
+  .project-emoji {
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+  }
+
+  .project-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .project-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-link {
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .projects-cta {
+    margin: 10px;
+    padding: 2rem 1.5rem;
+    border-radius: 25px;
+  }
+
+  .projects-cta h3 {
+    font-size: 1.3rem;
+  }
+
+  .projects-cta p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-nav-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .carousel-pagination {
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .pagination-dot.active {
+    width: 30px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .projects {
     margin: 5px;
-    padding: 20px 0;
+    padding: 20px 0.75rem;
+    border-radius: 8px;
+  }
+
+  .projects-grid {
+    gap: 1rem;
+  }
+
+  .project-card {
+    border-radius: 8px;
+  }
+
+  .project-header {
+    padding: 1rem;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
+
+  .project-image {
+    height: 120px;
+  }
+
+  .project-emoji {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+  }
+
+  .project-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-content p {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .project-link {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   .projects-cta {
     margin: 5px;
     padding: 1.5rem 1rem;
-  }
-
-  .project-links {
-    flex-direction: column;
-  }
-
-  .project-link {
-    justify-content: center;
+    border-radius: 15px;
   }
 
   .projects-cta h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+
+  .projects-cta p {
+    font-size: 0.85rem;
+  }
+
+  .carousel-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .carousel-pagination {
+    margin-top: 1rem;
+    gap: 0.4rem;
+  }
+
+  .pagination-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .pagination-dot.active {
+    width: 25px;
+    height: 8px;
   }
 }
