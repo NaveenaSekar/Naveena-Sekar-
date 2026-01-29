@@ -224,6 +224,20 @@
 
   .carousel-slide .service-card {
     flex: 0 0 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .carousel-wrapper {
+    gap: 0.5rem;
+  }
+
+  .carousel-container {
+    margin: 0 0.5rem;
+  }
+
+  .carousel-slide {
+    gap: 0;
   }
 
   .carousel-nav-btn {
