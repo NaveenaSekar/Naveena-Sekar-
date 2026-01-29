@@ -503,7 +503,24 @@
   }
 
   .project-image {
-    height: 150px;
+    height: 180px;
+  }
+
+  .project-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.5rem;
   }
 
   .project-emoji {

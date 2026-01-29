@@ -261,23 +261,31 @@
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: 200px;
+    justify-content: flex-start;
+    min-height: 250px;
+    overflow: hidden;
   }
 
   .service-icon {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 
   .service-card h3 {
     font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
   }
 
   .service-card p {
     font-size: 0.85rem;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin-bottom: 0;
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
   .carousel-nav-btn {
