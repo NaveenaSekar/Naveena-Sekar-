@@ -240,10 +240,23 @@
 
   .carousel-slide {
     gap: 0;
-    min-height: 250px;
+    min-height: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-align: center;
   }
 
   .services-carousel {
@@ -318,17 +331,19 @@
   }
 
   .service-card {
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 12px;
     border-width: 2px;
-    aspect-ratio: 1;
+    width: 280px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 200px;
-    max-width: 200px;
+    align-items: center;
+    text-align: center;
     margin: 0 auto;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .service-icon {
