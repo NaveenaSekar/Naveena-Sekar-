@@ -240,7 +240,7 @@
 
   .carousel-slide {
     gap: 0;
-    min-height: 350px;
+    min-height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -293,12 +293,20 @@
 
 @media (max-width: 480px) {
   .skills {
-    padding: 60px 1rem 120px 1rem;
+    padding: 20px 0;
     margin: 10px;
     border-radius: 12px;
     border-width: 2px;
     max-width: calc(100% - 20px);
     position: relative;
+  }
+
+  .skills .container {
+    max-width: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    background: #e5e7eb;
+    border-radius: 15px;
   }
 
   .section-header h2 {
@@ -310,15 +318,15 @@
   }
 
   .service-card {
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 12px;
     border-width: 2px;
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 300px;
-    max-width: 300px;
+    min-height: 200px;
+    max-width: 200px;
     margin: 0 auto;
     overflow: hidden;
   }
