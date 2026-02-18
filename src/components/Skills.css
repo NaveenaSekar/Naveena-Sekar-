@@ -346,6 +346,94 @@
     box-sizing: border-box;
   }
 
+  /* Mobile Accordion Styles */
+  .skill-accordion-item {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .skill-accordion-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .skill-accordion-header:hover {
+    background: rgba(22, 101, 52, 0.05);
+  }
+
+  .skill-accordion-icon {
+    font-size: 2.5rem;
+    color: #166534;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .skill-accordion-title {
+    flex: 1;
+    text-align: left;
+  }
+
+  .skill-accordion-title h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-accordion-title p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .skill-accordion-arrow {
+    color: #166534;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .skill-accordion-content {
+    background: rgba(22, 101, 52, 0.02);
+    border-top: 1px solid rgba(22, 101, 52, 0.1);
+  }
+
+  .skill-accordion-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .skill-accordion-skill-item {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .skill-accordion-skill-icon {
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+  }
+
+  .skill-accordion-skill-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #334155;
+  }
+
   .service-icon {
     font-size: 2rem;
     margin-bottom: 0.8rem;

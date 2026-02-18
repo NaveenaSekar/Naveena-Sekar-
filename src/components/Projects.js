@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaCode, FaDatabase, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './Projects.css';
 
@@ -12,6 +12,25 @@ const libImage = '/lib.jfif';
 const Projects = () => {
   const [imageErrors, setImageErrors] = React.useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Mobile accordion states
+  const [expandedProject, setExpandedProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const toggleProjectExpansion = (projectTitle) => {
+    if (!isMobile) return; // Only work on mobile
+    setExpandedProject(prev => prev === projectTitle ? null : projectTitle);
+  };
 
   const handleImageError = (index) => {
     setImageErrors(prev => ({ ...prev, [index]: true }));
@@ -102,124 +121,227 @@ const Projects = () => {
             <p>Showcasing my work and creativity</p>
           </motion.div>
 
-          <div className="projects-content">
-            <div className="carousel-wrapper">
-              <button className="carousel-nav-btn prev-btn" onClick={prevSlide}>
-                <FaChevronLeft />
-              </button>
-              
-              <div className="carousel-container">
-                <div
-                  className="projects-carousel"
-                  style={{ 
-                    transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
-                    width: `${totalSlides * 100}%`
-                  }}
-                >
-                  {slides.map((slide, slideIndex) => (
-                    <div 
-                      key={slideIndex} 
-                      className={`carousel-slide ${slide.length < cardsPerView ? 'fewer-cards' : ''}`}
-                      style={{ width: `${100 / totalSlides}%` }}
-                    >
-                      {slide.map((project, projectIndex) => (
-                        <motion.div
-                          key={slideIndex * cardsPerView + projectIndex}
-                          className="project-card"
-                          initial={{ opacity: 0, y: 30 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: (slideIndex * cardsPerView + projectIndex) * 0.1 }}
-                          viewport={{ once: true }}
-                          whileHover={{ scale: 1.02 }}
-                        >
-                          <div className="project-header">
-                            <div className="project-image">
-                              {imageErrors[slideIndex * cardsPerView + projectIndex] ? (
-                                <span className="project-emoji">{project.icon}</span>
-                              ) : (
-                                <img 
-                                  src={project.image} 
-                                  alt={project.title} 
-                                  className="project-image-preview"
-                                  onError={() => handleImageError(slideIndex * cardsPerView + projectIndex)}
-                                />
-                              )}
-                            </div>
-                            <div className="project-category">
-                              <span className="category-icon">{project.icon}</span>
-                              {project.category}
-                            </div>
-                            {project.status && (
-                              <div className="project-status">
-                                {project.status}
+          {/* Desktop Carousel - Mobile Accordion */}
+          {!isMobile ? (
+            <div className="projects-content">
+              <div className="carousel-wrapper">
+                <button className="carousel-nav-btn prev-btn" onClick={prevSlide}>
+                  <FaChevronLeft />
+                </button>
+                
+                <div className="carousel-container">
+                  <div
+                    className="projects-carousel"
+                    style={{ 
+                      transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
+                      width: `${totalSlides * 100}%`
+                    }}
+                  >
+                    {slides.map((slide, slideIndex) => (
+                      <div 
+                        key={slideIndex} 
+                        className={`carousel-slide ${slide.length < cardsPerView ? 'fewer-cards' : ''}`}
+                        style={{ width: `${100 / totalSlides}%` }}
+                      >
+                        {slide.map((project, projectIndex) => (
+                          <motion.div
+                            key={slideIndex * cardsPerView + projectIndex}
+                            className="project-card"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: (slideIndex * cardsPerView + projectIndex) * 0.1 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.02 }}
+                          >
+                            <div className="project-header">
+                              <div className="project-image">
+                                {imageErrors[slideIndex * cardsPerView + projectIndex] ? (
+                                  <span className="project-emoji">{project.icon}</span>
+                                ) : (
+                                  <img 
+                                    src={project.image} 
+                                    alt={project.title} 
+                                    className="project-image-preview"
+                                    onError={() => handleImageError(slideIndex * cardsPerView + projectIndex)}
+                                  />
+                                )}
                               </div>
-                            )}
-                          </div>
-
-                          <div className="project-content">
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
-                            
-                            <div className="project-technologies">
-                              {project.technologies.map((tech, techIndex) => (
-                                <span key={techIndex} className="tech-tag">{tech}</span>
-                              ))}
-                            </div>
-
-                            <div className="project-links">
-                              {project.github && (
-                                <a 
-                                  href={project.github} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="project-link github"
-                                >
-                                  <FaGithub />
-                                  View Code
-                                </a>
-                              )}
-                              {project.live && (
-                                <a 
-                                  href={project.live} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="project-link live"
-                                >
-                                  <FaExternalLinkAlt />
-                                  Live Demo
-                                </a>
-                              )}
-                              {!project.github && !project.live && (
-                                <span className="project-link disabled">
-                                  <FaCode />
-                                  Coming Soon
-                                </span>
+                              <div className="project-category">
+                                <span className="category-icon">{project.icon}</span>
+                                {project.category}
+                              </div>
+                              {project.status && (
+                                <div className="project-status">
+                                  {project.status}
+                                </div>
                               )}
                             </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  ))}
+
+                            <div className="project-content">
+                              <h3>{project.title}</h3>
+                              <p>{project.description}</p>
+                              
+                              <div className="project-technologies">
+                                {project.technologies.map((tech, techIndex) => (
+                                  <span key={techIndex} className="tech-tag">{tech}</span>
+                                ))}
+                              </div>
+
+                              <div className="project-links">
+                                {project.github && (
+                                  <a 
+                                    href={project.github} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="project-link github"
+                                  >
+                                    <FaGithub />
+                                    View Code
+                                  </a>
+                                )}
+                                {project.live && (
+                                  <a 
+                                    href={project.live} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="project-link live"
+                                  >
+                                    <FaExternalLinkAlt />
+                                    Live Demo
+                                  </a>
+                                )}
+                                {!project.github && !project.live && (
+                                  <span className="project-link disabled">
+                                    <FaCode />
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
+                <button className="carousel-nav-btn next-btn" onClick={nextSlide}>
+                  <FaChevronRight />
+                </button>
               </div>
 
-              <button className="carousel-nav-btn next-btn" onClick={nextSlide}>
-                <FaChevronRight />
-              </button>
+              <div className="carousel-pagination">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                  <button
+                    key={index}
+                    className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
-
-            <div className="carousel-pagination">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
-                  onClick={() => goToSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+          ) : (
+            /* Mobile Accordion */
+            <div className="projects-content mobile-accordion">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  className="project-accordion-item"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <motion.div
+                    className="project-accordion-header"
+                    onClick={() => toggleProjectExpansion(project.title)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="project-accordion-image">
+                      {imageErrors[index] ? (
+                        <span className="project-emoji">{project.icon}</span>
+                      ) : (
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="project-accordion-image-preview"
+                          onError={() => handleImageError(index)}
+                        />
+                      )}
+                    </div>
+                    <div className="project-accordion-content">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                      <div className="project-accordion-category">
+                        <span className="category-icon">{project.icon}</span>
+                        {project.category}
+                      </div>
+                    </div>
+                    <motion.div
+                      className="project-accordion-arrow"
+                      animate={{ rotate: expandedProject === project.title ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FaChevronRight />
+                    </motion.div>
+                  </motion.div>
+                  
+                  <AnimatePresence>
+                    {expandedProject === project.title && (
+                      <motion.div
+                        className="project-accordion-details"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      >
+                        <div className="project-accordion-technologies">
+                          <h4>Technologies Used:</h4>
+                          <div className="tech-tags">
+                            {project.technologies.map((tech, techIndex) => (
+                              <span key={techIndex} className="tech-tag">{tech}</span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="project-accordion-links">
+                          {project.github && (
+                            <a 
+                              href={project.github} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="project-link github full-width"
+                            >
+                              <FaGithub />
+                              View Code
+                            </a>
+                          )}
+                          {project.live && (
+                            <a 
+                              href={project.live} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="project-link live full-width"
+                            >
+                              <FaExternalLinkAlt />
+                              Live Demo
+                            </a>
+                          )}
+                          {!project.github && !project.live && (
+                            <span className="project-link disabled full-width">
+                              <FaCode />
+                              Coming Soon
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               ))}
             </div>
-          </div>
+          )}
         </div>
       </section>
 
