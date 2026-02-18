@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTrophy, FaMedal, FaCertificate, FaStar, FaArrowLeft } from 'react-icons/fa';
+import { FaTrophy, FaMedal, FaCertificate, FaStar, FaArrowLeft, FaMicrophone } from 'react-icons/fa';
+import sImage from '../s.jpeg';
 import './Achievements.css';
 
 const Achievements = () => {
@@ -9,6 +10,15 @@ const Achievements = () => {
   };
 
   const achievements = [
+    {
+      icon: <FaMicrophone />,
+      title: "Speak Up Event Runner-up",
+      description: "Achieved Runner-up in the Speak Up Event at SUSTAINX 2K26 – EEC, transforming stage nerves into a powerful and engaging delivery.",
+      date: "2026",
+      category: "Public Speaking",
+      color: "#9333ea",
+      image: sImage
+    },
     {
       icon: <FaTrophy />,
       title: "Academic Excellence",
@@ -86,6 +96,11 @@ const Achievements = () => {
               >
                 <div className="achievement-date">{achievement.date}</div>
                 <h3>{achievement.title}</h3>
+                {achievement.image && (
+                  <div className="achievement-image">
+                    <img src={achievement.image} alt={achievement.title} />
+                  </div>
+                )}
                 <p>{achievement.description}</p>
                 <span className="achievement-category" style={{ backgroundColor: achievement.color }}>
                   {achievement.category}
