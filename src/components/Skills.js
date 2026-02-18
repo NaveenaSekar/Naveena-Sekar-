@@ -128,6 +128,7 @@ const Skills = () => {
         </motion.div>
 
         <div className="skills-content">
+          {/* Desktop Carousel */}
           <div className="carousel-wrapper">
             <button className="carousel-nav-btn prev-btn" onClick={prevSlide}>
               <FaChevronLeft />
@@ -186,6 +187,29 @@ const Skills = () => {
               />
             ))}
           </div>
+        </div>
+
+        {/* Mobile Skills List */}
+        <div className="mobile-skills-list">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              className="mobile-skill-item"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              onClick={service.onClick}
+            >
+              <div className="mobile-skill-icon">
+                {service.icon}
+              </div>
+              <div className="mobile-skill-content">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Skills Bars */}
