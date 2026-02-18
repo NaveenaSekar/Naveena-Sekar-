@@ -18,6 +18,25 @@ const Skills = () => {
   const [isDevToolsPanelOpen, setIsDevToolsPanelOpen] = useState(false);
   const [isDeploymentPanelOpen, setIsDeploymentPanelOpen] = useState(false);
   
+  // Mobile accordion states
+  const [expandedSkill, setExpandedSkill] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const toggleSkillExpansion = (skillTitle) => {
+    if (!isMobile) return; // Only work on mobile
+    setExpandedSkill(prev => prev === skillTitle ? null : skillTitle);
+  };
+  
   const frontendSkills = [
     { name: "HTML", icon: <FaHtml5 />, color: "#E34F26" },
     { name: "CSS", icon: <FaCss3Alt />, color: "#1572B6" },
@@ -51,7 +70,8 @@ const Skills = () => {
       icon: <FaDesktop />,
       highlighted: false,
       borderColor: "#16a34a", // Green
-      onClick: () => setIsFrontendPanelOpen(true)
+      onClick: () => isMobile ? toggleSkillExpansion("Frontend Development") : setIsFrontendPanelOpen(true),
+      skills: frontendSkills
     },
     {
       title: "Database Management",
@@ -59,14 +79,17 @@ const Skills = () => {
       icon: <FaDatabase />,
       highlighted: false,
       borderColor: "#0ea5e9", // Teal/Blue
-      onClick: () => setIsDatabasePanelOpen(true)
+      onClick: () => isMobile ? toggleSkillExpansion("Database Management") : setIsDatabasePanelOpen(true),
+      skills: databaseSkills
     },
     {
       title: "Machine Learning",
       description: "Building data-driven models and insights to enhance functionality and user experiences.",
       icon: <FaChartBar />,
       highlighted: false,
-      borderColor: "#9333ea" // Purple
+      borderColor: "#9333ea", // Purple
+      onClick: () => isMobile ? toggleSkillExpansion("Machine Learning") : null,
+      skills: []
     },
     {
       title: "Development Tools & Technologies",
@@ -74,7 +97,8 @@ const Skills = () => {
       icon: <FaCode />,
       highlighted: false,
       borderColor: "#f59e0b", // Amber
-      onClick: () => setIsDevToolsPanelOpen(true)
+      onClick: () => isMobile ? toggleSkillExpansion("Development Tools & Technologies") : setIsDevToolsPanelOpen(true),
+      skills: devToolsSkills
     },
     {
       title: "Deployment & Hosting",
@@ -82,7 +106,8 @@ const Skills = () => {
       icon: <FaCloud />,
       highlighted: false,
       borderColor: "#2196f3", // Blue
-      onClick: () => setIsDeploymentPanelOpen(true)
+      onClick: () => isMobile ? toggleSkillExpansion("Deployment & Hosting") : setIsDeploymentPanelOpen(true),
+      skills: deploymentSkills
     }
   ];
 
@@ -127,90 +152,131 @@ const Skills = () => {
           <p>Transforming ideas into intuitive digital experiences</p>
         </motion.div>
 
-        <div className="skills-content">
-          {/* Desktop Carousel */}
-          <div className="carousel-wrapper">
-            <button className="carousel-nav-btn prev-btn" onClick={prevSlide}>
-              <FaChevronLeft />
-            </button>
-            
-            <div className="carousel-container">
-              <div
-                className="services-carousel"
-                style={{ 
-                  transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
-                  width: `${totalSlides * 100}%`
-                }}
+        {isMobile ? (
+          <div className="mobile-skills-accordion">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                className="skill-accordion-item"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                {slides.map((slide, slideIndex) => (
-                  <div 
-                    key={slideIndex} 
-                    className={`carousel-slide ${slide.length < cardsPerView ? 'fewer-cards' : ''}`}
-                    style={{ width: `${100 / totalSlides}%` }}
-                  >
-                    {slide.map((service, serviceIndex) => (
-                      <motion.div
-                        key={slideIndex * cardsPerView + serviceIndex}
-                        className={`service-card ${service.highlighted ? 'highlighted' : ''} ${service.onClick ? 'clickable' : ''}`}
-                        style={{ borderColor: service.borderColor }}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: (slideIndex * cardsPerView + serviceIndex) * 0.1 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05, y: -5 }}
-                        onClick={service.onClick || undefined}
-                      >
-                        <div className="service-icon">
-                          {service.icon}
-                        </div>
-                        <h3>{service.title}</h3>
-                        <p>{service.description}</p>
-                      </motion.div>
-                    ))}
+                <motion.div
+                  className="skill-accordion-header"
+                  onClick={() => toggleSkillExpansion(service.title)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="skill-accordion-icon">
+                    {service.icon}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <button className="carousel-nav-btn next-btn" onClick={nextSlide}>
-              <FaChevronRight />
-            </button>
-          </div>
-
-          <div className="carousel-pagination">
-            {Array.from({ length: totalSlides }).map((_, index) => (
-              <button
-                key={index}
-                className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+                  <div className="skill-accordion-title">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                  </div>
+                  <motion.div
+                    className="skill-accordion-arrow"
+                    animate={{ rotate: expandedSkill === service.title ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FaChevronRight />
+                  </motion.div>
+                </motion.div>
+                
+                <AnimatePresence>
+                  {expandedSkill === service.title && service.skills && (
+                    <motion.div
+                      className="skill-accordion-content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    >
+                      <div className="skill-accordion-skills">
+                        {service.skills.map((skill, skillIndex) => (
+                          <motion.div
+                            key={skill.name}
+                            className="skill-accordion-skill-item"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: skillIndex * 0.1 }}
+                          >
+                            <div className="skill-accordion-skill-icon" style={{ color: skill.color }}>
+                              {skill.icon}
+                            </div>
+                            <span className="skill-accordion-skill-name">{skill.name}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="skills-content">
+            <div className="carousel-wrapper">
+              <button className="carousel-nav-btn prev-btn" onClick={prevSlide}>
+                <FaChevronLeft />
+              </button>
+              
+              <div className="carousel-container">
+                <div
+                  className="services-carousel"
+                  style={{ 
+                    transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
+                    width: `${totalSlides * 100}%`
+                  }}
+                >
+                  {slides.map((slide, slideIndex) => (
+                    <div 
+                      key={slideIndex} 
+                      className={`carousel-slide ${slide.length < cardsPerView ? 'fewer-cards' : ''}`}
+                      style={{ width: `${100 / totalSlides}%` }}
+                    >
+                      {slide.map((service, serviceIndex) => (
+                        <motion.div
+                          key={slideIndex * cardsPerView + serviceIndex}
+                          className={`service-card ${service.highlighted ? 'highlighted' : ''} ${service.onClick ? 'clickable' : ''}`}
+                          style={{ borderColor: service.borderColor }}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: (slideIndex * cardsPerView + serviceIndex) * 0.1 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.05, y: -5 }}
+                          onClick={service.onClick || undefined}
+                        >
+                          <div className="service-icon">
+                            {service.icon}
+                          </div>
+                          <h3>{service.title}</h3>
+                          <p>{service.description}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-        {/* Mobile Skills List */}
-        <div className="mobile-skills-list">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              className="mobile-skill-item"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              onClick={service.onClick}
-            >
-              <div className="mobile-skill-icon">
-                {service.icon}
-              </div>
-              <div className="mobile-skill-content">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              <button className="carousel-nav-btn next-btn" onClick={nextSlide}>
+                <FaChevronRight />
+              </button>
+            </div>
+
+            <div className="carousel-pagination">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Skills Bars */}
         <AnimatePresence>
