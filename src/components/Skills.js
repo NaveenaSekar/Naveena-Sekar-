@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaDesktop, FaCode, FaDatabase, FaChartBar, FaCloud,
-  FaChevronLeft, FaChevronRight, FaHtml5, FaCss3Alt, FaJs, FaTimes, FaFileAlt
+  FaChevronLeft, FaChevronRight, FaHtml5, FaCss3Alt, FaTimes, FaFileAlt
 } from 'react-icons/fa';
 import { 
   SiReact, SiMongodb, SiMysql, SiGithub, 
